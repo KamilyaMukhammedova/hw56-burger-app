@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Container {
+  max-width: 1200px;
+  padding: 30px 15px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Container-inner {
+  width: 45%;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.Title {
+  text-align: center;
+}
