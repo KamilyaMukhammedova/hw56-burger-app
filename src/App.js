@@ -1,12 +1,13 @@
+import {useState} from "react";
+import {nanoid} from "nanoid";
 import meatImage from './assets/Meat.png';
 import cheeseImage from './assets/Cheese.png';
 import saladImage from './assets/Salad.png';
 import baconImage from './assets/Bacon.png';
-import {useState} from "react";
-import {nanoid} from "nanoid";
 import Ingredients from "./components/Ingredients/Ingredients";
 import Burger from "./components/Burger/Burger";
 import Filling from "./components/Filling/Filling";
+import Price from "./components/Price/Price";
 
 const INGREDIENTS = [
   {name: 'Meat', price: 50, image: meatImage},
@@ -23,9 +24,12 @@ const App = () => {
     {name: 'Bacon', count: 0, id: nanoid()},
   ]);
 
+  const [price, setPrice] = useState(20);
+
   const addIngredient = ingId => {
-    const ingredientsCopy = ingredients.map(ing => {
+    const ingredientsCopy = ingredients.map((ing, index) => {
       if(ing.id === ingId) {
+        setPrice(prev => prev + INGREDIENTS[index].price);
         return {
           ...ing,
           count: ing.count + 1,
@@ -37,8 +41,9 @@ const App = () => {
   };
 
   const removeIngredient = ingId => {
-    const ingredientsCopy = ingredients.map(ing => {
+    const ingredientsCopy = ingredients.map((ing, index) => {
       if(ing.id === ingId) {
+        setPrice(prev => prev - INGREDIENTS[index].price);
         return {
           ...ing,
           count: ing.count - 1,
@@ -74,17 +79,20 @@ const App = () => {
     });
   };
 
+  const priceComponent = <Price price={price}/>;
+
   const burgerComponent = <Burger children={getFillingComponent()}/>;
 
   return (
     <div className="Container">
       <div className="Container-inner">
-        <h2 className="Title">Ingredients</h2>
+        <h2>Ingredients</h2>
         {ingredientsComponent}
       </div>
       <div className="Container-inner">
-        <h2 className="Title">Burger</h2>
+        <h2>Burger</h2>
         {burgerComponent}
+        {priceComponent}
       </div>
     </div>
   );
