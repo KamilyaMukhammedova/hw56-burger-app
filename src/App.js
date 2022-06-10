@@ -8,21 +8,34 @@ import {nanoid} from "nanoid";
 import Ingredients from "./components/Ingredients/Ingredients";
 
 const INGREDIENTS = [
-  {name: 'Meat', price: 50, image: meatImage, id: nanoid()},
-  {name: 'Cheese', price: 20, image: cheeseImage, id: nanoid()},
-  {name: 'Salad', price: 5, image: saladImage, id: nanoid()},
-  {name: 'Bacon', price: 30, image: baconImage, id: nanoid()},
+  {name: 'Meat', price: 50, image: meatImage},
+  {name: 'Cheese', price: 20, image: cheeseImage},
+  {name: 'Salad', price: 5, image: saladImage},
+  {name: 'Bacon', price: 30, image: baconImage},
 ];
 
 const App = () => {
   const [ingredients, setIngredients] = useState([
-    {name: 'Meat', count: 0},
-    {name: 'Cheese', count: 0},
-    {name: 'Salad', count: 0},
-    {name: 'Bacon', count: 0},
+    {name: 'Meat', count: 0, id: nanoid()},
+    {name: 'Cheese', count: 0, id: nanoid()},
+    {name: 'Salad', count: 0, id: nanoid()},
+    {name: 'Bacon', count: 0, id: nanoid()},
   ]);
 
-  const ingredientsComponent = <Ingredients ingredients={INGREDIENTS} ing={ingredients}/>;
+  const addIngredient = ingId => {
+    const ingredientsCopy = ingredients.map(ing => {
+      if(ing.id === ingId) {
+        return {
+          ...ing,
+          count: ing.count + 1,
+        }
+      }
+      return ing;
+    });
+    setIngredients(ingredientsCopy);
+  };
+
+  const ingredientsComponent = <Ingredients ingredients={ingredients} ing={INGREDIENTS} addIng={addIngredient}/>;
 
   return (
     <div className="Container">

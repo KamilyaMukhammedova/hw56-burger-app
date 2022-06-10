@@ -5,9 +5,10 @@ const Ingredients = (props) => {
   return props.ingredients.map((ingredient, index) => {
     return <OneIngredient
       key={ingredient.id}
-      image={ingredient.image}
-      name={ingredient.name}
-      count={props.ing[index].count}
+      image={props.ing[index].image}
+      addIng={() => props.addIng(ingredient.id)}
+      name={props.ing[index].name}
+      count={ingredient.count}
     />
   });
 };
