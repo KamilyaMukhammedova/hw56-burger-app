@@ -3,9 +3,10 @@ import cheeseImage from './assets/Cheese.png';
 import saladImage from './assets/Salad.png';
 import baconImage from './assets/Bacon.png';
 import {useState} from "react";
-import './BurgerView.css';
 import {nanoid} from "nanoid";
 import Ingredients from "./components/Ingredients/Ingredients";
+import Burger from "./components/Burger/Burger";
+import Filling from "./components/Filling/Filling";
 
 const INGREDIENTS = [
   {name: 'Meat', price: 50, image: meatImage},
@@ -48,6 +49,17 @@ const App = () => {
     setIngredients(ingredientsCopy);
   };
 
+  const getFilling = () => {
+    const fillingArray = [];
+    for(let i = 0; i < ingredients.length; i++) {
+      for(let j = 0; j < ingredients[i].count; j++) {
+        fillingArray.push(ingredients[i].name);
+      }
+    }
+
+    return fillingArray;
+  };
+
   const ingredientsComponent =
     <Ingredients
       ingredients={ingredients}
@@ -56,6 +68,14 @@ const App = () => {
       removeIng={removeIngredient}
     />;
 
+  const getFillingComponent = () => {
+    return getFilling().map((filling, index) => {
+      return <Filling key={index} className={filling}/>;
+    });
+  };
+
+  const burgerComponent = <Burger children={getFillingComponent()}/>;
+
   return (
     <div className="Container">
       <div className="Container-inner">
@@ -63,10 +83,11 @@ const App = () => {
         {ingredientsComponent}
       </div>
       <div className="Container-inner">
-        <p>hhhhh</p>
+        <h2 className="Title">Burger</h2>
+        {burgerComponent}
       </div>
     </div>
   );
-}
+};
 
 export default App;
