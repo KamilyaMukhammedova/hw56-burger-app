@@ -35,7 +35,26 @@ const App = () => {
     setIngredients(ingredientsCopy);
   };
 
-  const ingredientsComponent = <Ingredients ingredients={ingredients} ing={INGREDIENTS} addIng={addIngredient}/>;
+  const removeIngredient = ingId => {
+    const ingredientsCopy = ingredients.map(ing => {
+      if(ing.id === ingId) {
+        return {
+          ...ing,
+          count: ing.count - 1,
+        }
+      }
+      return ing;
+    });
+    setIngredients(ingredientsCopy);
+  };
+
+  const ingredientsComponent =
+    <Ingredients
+      ingredients={ingredients}
+      ing={INGREDIENTS}
+      addIng={addIngredient}
+      removeIng={removeIngredient}
+    />;
 
   return (
     <div className="Container">

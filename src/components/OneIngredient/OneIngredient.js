@@ -9,7 +9,13 @@ const OneIngredient = (props) => {
       </button>
       <p>{props.name}</p>
       <p>x{props.count}</p>
-      <button type="button">Remove one</button>
+      <button
+        type="button"
+        onClick={props.removeIng}
+        style={props.count === 0 ? {display: 'none'} : {display: 'inline-block'}}
+      >
+        Remove one
+      </button>
     </div>
   );
 };

@@ -9,6 +9,7 @@ const Ingredients = (props) => {
       addIng={() => props.addIng(ingredient.id)}
       name={props.ing[index].name}
       count={ingredient.count}
+      removeIng={() => props.removeIng(ingredient.id)}
     />
   });
 };
