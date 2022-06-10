@@ -6,10 +6,12 @@ const Ingredients = (props) => {
     return <OneIngredient
       key={ingredient.id}
       image={props.ing[index].image}
+      price={props.ing[index].price}
       addIng={() => props.addIng(ingredient.id)}
       name={props.ing[index].name}
       count={ingredient.count}
       removeIng={() => props.removeIng(ingredient.id)}
+      removeAllIng={() => props.removeAllIng(ingredient.id)}
     />
   });
 };

@@ -4,17 +4,29 @@ import './OneIngredient.css';
 const OneIngredient = (props) => {
   return (
     <div className="IngredientDiv">
-      <button onClick={props.addIng} style={{border: 'none'}}>
+      <button onClick={props.addIng} style={{border: 'none', width: '20%'}}>
         <img src={props.image} alt={props.name} className="IngImg"/>
       </button>
-      <p>{props.name}</p>
-      <p>x{props.count}</p>
+      <p style={{width: '25%'}}>{props.name}</p>
+      <p style={{width: '10%', fontSize: '10px'}}>{props.price} KGS</p>
+      <p style={{width: '25%'}}>x{props.count}</p>
       <button
         type="button"
+        className="BtnRemove"
         onClick={props.removeIng}
-        style={props.count === 0 ? {display: 'none'} : {display: 'inline-block'}}
+        style={props.count !== 0 ? {backgroundColor: '#96c962'} : {backgroundColor: 'inherit'}}
+        disabled={props.count === 0}
       >
-        Remove one
+        -
+      </button>
+      <button
+        type="button"
+        className="BtnRemove"
+        onClick={props.removeAllIng}
+        style={props.count !== 0 ? {backgroundColor: 'green'} : {backgroundColor: 'inherit'}}
+        disabled={props.count === 0}
+      >
+        Remove all
       </button>
     </div>
   );

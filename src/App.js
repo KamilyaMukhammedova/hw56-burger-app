@@ -54,6 +54,20 @@ const App = () => {
     setIngredients(ingredientsCopy);
   };
 
+  const removeAllIngredients = ingId => {
+    const ingredientsCopy = ingredients.map((ing, index) => {
+      if(ing.id === ingId) {
+        setPrice(prev => prev - (INGREDIENTS[index].price * ing.count));
+        return {
+          ...ing,
+          count: 0,
+        }
+      }
+      return ing;
+    });
+    setIngredients(ingredientsCopy);
+  };
+
   const getFilling = () => {
     const fillingArray = [];
     for(let i = 0; i < ingredients.length; i++) {
@@ -61,8 +75,13 @@ const App = () => {
         fillingArray.push(ingredients[i].name);
       }
     }
-
     return fillingArray;
+  };
+
+  const getFillingComponent = () => {
+    return getFilling().map((filling, index) => {
+      return <Filling key={index} className={filling}/>;
+    });
   };
 
   const ingredientsComponent =
@@ -71,16 +90,10 @@ const App = () => {
       ing={INGREDIENTS}
       addIng={addIngredient}
       removeIng={removeIngredient}
+      removeAllIng={removeAllIngredients}
     />;
 
-  const getFillingComponent = () => {
-    return getFilling().map((filling, index) => {
-      return <Filling key={index} className={filling}/>;
-    });
-  };
-
   const priceComponent = <Price price={price}/>;
-
   const burgerComponent = <Burger children={getFillingComponent()}/>;
 
   return (
